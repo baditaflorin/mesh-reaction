@@ -28,6 +28,19 @@ A **rootless-computing** peer-to-peer browser app. No backend of its own beyond 
 
 Read the principles → **https://baditaflorin.github.io/rootless-computing/principles.html**
 
+## How to play
+
+A co-located group reflex contest — like an F1 start light for the whole room. No app store, no accounts. One person opens the link, everyone else scans the room QR (⚙ → invite) or opens the same link on their own phone.
+
+1. **Arm the round.** Anyone taps **Arm round**. Every phone switches to a big red **"Wait for green…"** panel and a hidden timer starts — a random 2–6 second hold.
+2. **Hold your nerve.** Tap during the red and it's a **FALSE START** for you: you're locked out of scoring this round (shown at the bottom of the board).
+3. **GO!** At the synced moment every phone flips **green** and shows **TAP!** at the exact same instant — the moment is agreed via a mesh-median clock, not any one device's wall clock, so nobody gets an unfair head start.
+4. **Fastest reflex wins.** The instant you tap, your reaction time (ms since the flip) lands on a live leaderboard, fastest first. The round winner gets confetti; everyone feels the green flip via a haptic buzz (where supported).
+
+Your **best-ever** time is remembered across rounds. Hit **New round** to go again — anyone can re-arm, it's cooperative like passing one stopwatch around the table.
+
+All timing is measured in each phone's own mesh-clock frame, so a device with a skewed wall clock can't corrupt the ranking — the absolute offset cancels out.
+
 ## Quickstart
 
 Open the live URL on two devices in the same room (set in ⚙ settings, or scan the room QR). Everything else is in-app.
