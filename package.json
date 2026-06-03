@@ -1,36 +1,6 @@
 {
-  "name": "mesh-reaction",
-  "version": "0.1.0",
-  "description": "Group reflex game — phones flip at a synced moment, fastest tap wins",
-  "type": "module",
-  "private": false,
-  "homepage": "https://baditaflorin.github.io/mesh-reaction/",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/baditaflorin/mesh-reaction.git"
-  },
   "bugs": {
     "url": "https://github.com/baditaflorin/mesh-reaction/issues"
-  },
-  "license": "MIT",
-  "scripts": {
-    "dev": "vite --host 0.0.0.0",
-    "build": "bash scripts/build-pages.sh",
-    "preview": "vite preview --host 0.0.0.0",
-    "pages-preview": "vite preview --host 0.0.0.0 --port 4174",
-    "smoke": "bash scripts/smoke.sh",
-    "fmt": "prettier --write .",
-    "fmt:check": "prettier --check .",
-    "typecheck": "tsc --noEmit -p tsconfig.app.json",
-    "test": "npm run test:unit && npm run test:e2e",
-    "test:unit": "vitest run",
-    "test:unit:watch": "vitest",
-    "test:e2e": "playwright test",
-    "test:e2e:headed": "playwright test --headed",
-    "test:e2e:install": "playwright install chromium",
-    "screenshot": "bash ../mesh-common/scripts/screenshot-app.sh",
-    "demo": "bash ../mesh-common/scripts/record-demo.sh",
-    "audit:security": "bash ../mesh-common/scripts/audit-app-security.sh"
   },
   "dependencies": {
     "@baditaflorin/mesh-common": "file:../mesh-common",
@@ -39,6 +9,7 @@
     "y-webrtc": "^10.3.0",
     "yjs": "^13.6.27"
   },
+  "description": "Group reflex game — phones flip at a synced moment, fastest tap wins",
   "devDependencies": {
     "@playwright/test": "^1.50.0",
     "@testing-library/jest-dom": "^6.6.0",
@@ -51,9 +22,39 @@
     "prettier": "^3.7.4",
     "typescript": "^5.9.3",
     "vite": "^7.0.0",
-    "vitest": "^2.1.0"
+    "vitest": "4.1.0"
   },
   "engines": {
-    "node": ">=22"
-  }
+    "node": "\u003e=22"
+  },
+  "homepage": "https://baditaflorin.github.io/mesh-reaction/",
+  "license": "MIT",
+  "name": "mesh-reaction",
+  "overrides": {},
+  "private": false,
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/baditaflorin/mesh-reaction.git"
+  },
+  "scripts": {
+    "dev": "vite --host 0.0.0.0",
+    "build": "bash scripts/build-pages.sh",
+    "preview": "vite preview --host 0.0.0.0",
+    "pages-preview": "vite preview --host 0.0.0.0 --port 4174",
+    "smoke": "bash scripts/smoke.sh",
+    "fmt": "prettier --write .",
+    "fmt:check": "prettier --check .",
+    "typecheck": "tsc --noEmit -p tsconfig.app.json",
+    "test": "npm run test:unit \u0026\u0026 npm run test:e2e",
+    "test:unit": "vitest run",
+    "test:unit:watch": "vitest",
+    "test:e2e": "playwright test",
+    "test:e2e:headed": "playwright test --headed",
+    "test:e2e:install": "playwright install chromium",
+    "screenshot": "bash ../mesh-common/scripts/screenshot-app.sh",
+    "demo": "bash ../mesh-common/scripts/record-demo.sh",
+    "audit:security": "bash ../mesh-common/scripts/audit-app-security.sh"
+  },
+  "type": "module",
+  "version": "0.1.0"
 }
