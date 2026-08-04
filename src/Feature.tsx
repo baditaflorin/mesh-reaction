@@ -1,5 +1,6 @@
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import {
+  type ClockSync,
   type MeshConfig,
   type YRoom,
   ConfettiLayer,
@@ -73,8 +74,41 @@ export function Feature({ room, config }: Props) {
   const vibration = useVibration();
 
   // Mesh-median clock — every phone agrees on when `goAt` arrives.
-  const clock = useMemo(() => (room ? createClockSync(room.provider) : null), [room]);
-  useEffect(() => () => clock?.destroy(), [clock]);
+  //
+  // This MUST be created in an effect, not useMemo: createClockSync() has a
+  // side effect (it publishes this peer's local time onto the shared y-webrtc
+  // awareness object via `setLocalStateField`), and y-protocols/awareness
+  // fires its "change" listeners synchronously from inside that call. One of
+  // those listeners is useYRoom's `updatePeers`, which lives on the *parent*
+  // <App> component and calls its own setState. Doing this from useMemo means
+  // it runs during Feature's render, so that setState fires synchronously
+  // while a different component (App) is mid-render — React logs "Cannot
+  // update a component (App) while rendering a different component
+  // (Feature)" and discards/retries the render on every single page load.
+  // Deferring the call to an effect (which runs after commit) makes the
+  // cross-component update legal and removes the retry.
+  //
+  // Depend on `room?.provider`, NOT `room` itself: useYRoom hands back a
+  // brand-new `room` object on every awareness "change" (peer join/leave,
+  // every ~1.5s clock ping from any peer), even though `room.provider` is
+  // the same underlying WebrtcProvider throughout. Depending on `room` would
+  // re-run this effect on every such tick; since creating the clock publishes
+  // a clock sample (another awareness "change"), that becomes an unbounded
+  // create → publish → change → setRoom → recreate loop ("Maximum update
+  // depth exceeded"). `room.provider` only changes when the room is actually
+  // torn down and recreated (roomId/config change), so the effect runs once
+  // per real connection instead of once per awareness tick.
+  const provider = room?.provider ?? null;
+  const [clock, setClock] = useState<ClockSync | null>(null);
+  useEffect(() => {
+    if (!provider) {
+      setClock(null);
+      return;
+    }
+    const c = createClockSync(provider);
+    setClock(c);
+    return () => c.destroy();
+  }, [provider]);
 
   const { round, arm } = useRound(room);
   const hasRound = round.roundId !== "" && round.goAt > 0;
