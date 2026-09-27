@@ -30,7 +30,11 @@
   "homepage": "https://baditaflorin.github.io/mesh-reaction/",
   "license": "MIT",
   "name": "mesh-reaction",
-  "overrides": {},
+  "overrides": {
+    "browserslist": "4.28.7",
+    "nanoid": "3.3.18",
+    "postcss": "8.5.18"
+  },
   "private": false,
   "repository": {
     "type": "git",
